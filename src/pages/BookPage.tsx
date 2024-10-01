@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {  MoreHorizontal } from "lucide-react";
+import {  CirclePlus, MoreHorizontal } from "lucide-react";
 import { Book } from "@/types";
 
 
@@ -51,6 +51,7 @@ const BookPage = () => {
 
   return (
     <div>
+      <div className="flex items-center justify-between">
       <Breadcrumb>
   <BreadcrumbList>
     <BreadcrumbItem>
@@ -63,6 +64,10 @@ const BookPage = () => {
     </BreadcrumbItem>
   </BreadcrumbList>
 </Breadcrumb>
+<Button>
+<CirclePlus size={18}/>
+  <span className="ml-2">Add book </span>  </Button>
+      </div>
 <Card className="mt-6">
                 <CardHeader>
                   <CardTitle>Books</CardTitle>
