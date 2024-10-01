@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import RegisterPage from "./pages/RegisterPage.tsx";
 import DashboardLayout from "./layouts/DashboardLayout.tsx";
 import BookPage from "./pages/BookPage.tsx";
+import AuthLayout from "./layouts/AuthLayout.tsx";
 
  const router = createBrowserRouter([
     
@@ -24,13 +25,19 @@ import BookPage from "./pages/BookPage.tsx";
         
     },
     {
-    path:"/login",
-    element:<LoginPage/>
-},
-{
-    path:"/register",
-    element:<RegisterPage/>
-}
+        path:"/auth",
+        element:<AuthLayout/>,
+        children:[
+            {
+                path:"login",
+                element:<LoginPage/>
+            },
+            {
+                path:"register",
+                element:<RegisterPage/>
+            }]
+        }
+    
 
 ])
 export default router;
