@@ -1,3 +1,6 @@
+
+
+
 import {
     Card,
     CardContent,
@@ -15,23 +18,29 @@ import { useRef } from "react"
 import { useMutation } from "@tanstack/react-query"
 import { login } from "@/http/api"
 import { LoaderCircle } from "lucide-react"
+import useTokenStore from "@/store"
 
 
 
   
 const LoginPage = () => {
+  
   const navigate = useNavigate();
+  const setToken=useTokenStore((state)=>state.setToken)
   const emailRef=useRef<HTMLInputElement>(null)
   const passwordRef=useRef<HTMLInputElement>(null)
 
   const mutation = useMutation({
     mutationFn: login,
 
-    onSuccess: () => {
-      console.log("login successful");
+    onSuccess: ( response) => {
+      console.log(response);
+      
+    setToken(response?.data?.accessToken)
       navigate('/dashboard/home');
       
     },
+    
   })
 
   const handleLoginSubmit=()=>{

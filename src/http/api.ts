@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+
 const api= axios.create({
     baseURL:"http://localhost:4000",
     headers:{
@@ -12,5 +13,6 @@ export const login=async(data:{email:string;password:string})=>{
 }
 
 export const register=async(data:{email:string;password:string;name:string})=>{
-    return api.post('api/users/register',data)
+    return await axios.post("http://localhost:4000/api/login", data);
+  
 }
