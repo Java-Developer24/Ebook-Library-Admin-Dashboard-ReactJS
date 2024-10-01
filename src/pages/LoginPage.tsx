@@ -20,7 +20,9 @@ import { login } from "@/http/api"
 import { LoaderCircle } from "lucide-react"
 import useTokenStore from "@/store"
 
-
+interface LoginResponse {
+  accessToken: string;
+}
 
   
 const LoginPage = () => {
@@ -30,13 +32,13 @@ const LoginPage = () => {
   const emailRef=useRef<HTMLInputElement>(null)
   const passwordRef=useRef<HTMLInputElement>(null)
 
-  const mutation = useMutation({
+  const mutation = useMutation<LoginResponse, Error, { email: string; password: string }>({
     mutationFn: login,
 
     onSuccess: ( response) => {
       console.log(response);
       
-    setToken(response?.data?.accessToken)
+    setToken(response.accessToken)
       navigate('/dashboard/home');
       
     },
