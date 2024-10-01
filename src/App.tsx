@@ -1,12 +1,13 @@
 
-
+import { Button } from "./components/ui/button"
 
 function App() {
 
 
   return (
     <>
-      Welcome to elib dashboard
+      <h1>Welcome to elib dashboard</h1>
+      <Button variant={"default"}>Click me</Button>
     </>
   )
 }
