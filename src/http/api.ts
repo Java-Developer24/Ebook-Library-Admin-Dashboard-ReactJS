@@ -1,3 +1,4 @@
+import { Book } from '@/types';
 import axios from 'axios'
 // Define the type of the login response (based on your backend's response)
 
@@ -28,4 +29,9 @@ export const register=async(data:{email:string;password:string;name:string})=>{
     // Make sure you're returning only the data part containing accessToken
     return response.data;
   
+}
+
+export const getBooks=async()=>{
+  const response = await api.get<Book[]>('/api/users/books');
+  return response.data; 
 }
