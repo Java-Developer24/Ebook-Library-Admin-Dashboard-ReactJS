@@ -28,6 +28,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {  CirclePlus, MoreHorizontal } from "lucide-react";
 import { Book } from "@/types";
+import { Link } from "react-router-dom";
 
 
 
@@ -64,9 +65,12 @@ const BookPage = () => {
     </BreadcrumbItem>
   </BreadcrumbList>
 </Breadcrumb>
+<Link to="/dashboard/books/create">
 <Button>
 <CirclePlus size={18}/>
-  <span className="ml-2">Add book </span>  </Button>
+<span className="ml-2">Add book </span> 
+</Button>
+ </Link>
       </div>
 <Card className="mt-6">
                 <CardHeader>

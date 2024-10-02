@@ -1,3 +1,4 @@
+import useTokenStore from '@/store';
 import { Book } from '@/types';
 import axios from 'axios'
 // Define the type of the login response (based on your backend's response)
@@ -14,6 +15,17 @@ const api= axios.create({
     headers:{
         "Content-Type":"application/json",
     }
+});
+
+api.interceptors.request.use((config)=>{
+  const token=useTokenStore(state=>state.token);
+  if (!config.headers) {
+    config.headers = {};
+  }
+  if(token){
+    config.headers.Authorization=`Bearer ${token}`;
+  }
+  return config;
 })
 
 export const login=async(data:{email:string;password:string})=>{
@@ -34,4 +46,13 @@ export const register=async(data:{email:string;password:string;name:string})=>{
 export const getBooks=async()=>{
   const response = await api.get<Book[]>('/api/users/books');
   return response.data; 
+}
+export const createBook=async(data:FormData)=>{
+  const response=await api.post('/api/users/books',data,{
+    headers:{
+    'Content-Type':'multipart/form-data',
+
+    },
+  })
+  return response.data;
 }
