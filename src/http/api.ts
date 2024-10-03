@@ -18,7 +18,7 @@ const api= axios.create({
 });
 
 api.interceptors.request.use((config)=>{
-  const token=useTokenStore(state=>state.token);
+  const token=useTokenStore.getState().token
   if (!config.headers) {
     config.headers = {};
   }

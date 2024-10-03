@@ -124,7 +124,7 @@ const BookPage = () => {
                         </TableCell>
                         
                         <TableCell className="hidden md:table-cell">
-                          {book.author.name}
+                        {book.author ? book.author.name : "Unknown Author"}
                         </TableCell>
                         <TableCell className="hidden md:table-cell">
                          {book.createdAt}

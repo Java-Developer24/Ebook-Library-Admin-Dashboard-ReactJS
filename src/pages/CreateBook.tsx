@@ -8,8 +8,10 @@ import { Textarea } from "@/components/ui/textarea"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createBook } from "@/http/api"
+import { LoaderCircle } from "lucide-react"
+import { Link, useNavigate } from "react-router-dom"
 
 
 const formSchema = z.object({
@@ -43,14 +45,19 @@ const CreateBook = () => {
           },
        
       })
+        const queryClient= useQueryClient();
+
       const coverImageRef=form.register('coverImage');
       const fileRef=form.register("file");
+      const navigate=useNavigate();
       
   const mutation = useMutation({
     mutationFn: createBook,
 
     onSuccess: () => {
-      
+      queryClient.invalidateQueries({ queryKey: ['books'] })
+
+      navigate("/dashboard/books")
       console.log("book created sucessfully");
       
       
@@ -94,12 +101,14 @@ const CreateBook = () => {
   </BreadcrumbList>
 </Breadcrumb>
 <div className="flex items-center gap-4">
+  <Link to="/dashboard/books">
 <Button variant={"outline"}>
 
-<span className="ml-2">Cancel </span> 
+<span className="ml-2" >Cancel </span> 
 </Button>
-<Button type="submit" >
-
+</Link>
+<Button type="submit" disabled={mutation.isPending} >
+{mutation.isPending && <LoaderCircle className="animate-spin"/> }
 <span className="ml-2">Submit </span> 
 </Button>
 </div>
